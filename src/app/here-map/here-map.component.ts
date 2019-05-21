@@ -40,7 +40,8 @@ export class HereMapComponent implements OnInit {
     public ngOnInit() {
         this.platform = new H.service.Platform({
             "app_id": this.appId,
-            "app_code": this.appCode
+            "app_code": this.appCode,
+            useHTTPS: true
         });
     }
 
