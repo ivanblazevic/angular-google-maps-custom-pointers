@@ -1,0 +1,98 @@
+@import '../shared/styles/variables';
+
+$truckColor: gray;
+
+:host {
+  filter: drop-shadow(0 0 1.5px #333);
+  display: flow-root;
+  pointer-events: none;
+}
+
+@mixin pointerColor($color) {
+  background: $color;
+  .icon-container:after {
+    border-top-color: $color;
+  }
+}
+
+.arrow-box {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: solid 5px white;
+  color: $primaryColorDarker;
+  cursor: pointer;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:after {
+    z-index: -1;
+    margin-top: 38px;
+    left: 10px;
+    border: solid transparent;
+    content: ' ';
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-top-color: white;
+    border-width: 20px;
+  }
+
+  img {
+    min-width: 100px;
+    width: auto;
+    max-height: 100px;
+    height: auto;
+  }
+
+  &.operate {
+    @include pointerColor($operate_color);
+  }
+
+  &.drive {
+    @include pointerColor($drive_color);
+  }
+
+  &.idle {
+    @include pointerColor($idle_color);
+  }
+
+  &.off {
+    @include pointerColor($off_color);
+  }
+
+  &.service {
+    @include pointerColor($primaryColorDarker);
+  }
+}
+
+.icon-container {
+  width: 38px;
+  height: 38px;
+  background: white;
+  display: flex;
+  border-radius: 20px;
+
+  i {
+    font-size: 20px;
+    margin: auto;
+    color: $truckColor;
+  }
+
+  &:after {
+    margin-top: 38px;
+    left: 30px;
+    border: solid transparent;
+    content: ' ';
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-top-color: white;
+    border-width: 12px;
+    margin-left: -12px;
+  }
+}
