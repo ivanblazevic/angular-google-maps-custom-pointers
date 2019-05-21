@@ -1,5 +1,5 @@
 import { Component, ComponentFactoryResolver, ElementRef, ViewChild, ViewContainerRef } from '@angular/core';
-import { environment } from 'src/environments/environment';
+import { environment } from './../environments/environment';
 import { LocationPointerMarkerComponent } from './location-pointer-marker/location-pointer-marker.component';
 
 declare var H: any;
