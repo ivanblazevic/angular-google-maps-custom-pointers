@@ -1,4 +1,5 @@
-import { Component, ComponentFactoryResolver, ElementRef, Inject, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ComponentFactoryResolver, ComponentRef, ElementRef, ViewChild, ViewContainerRef } from '@angular/core';
+import { HereMapService } from './here-map/here-map.service';
 import { LocationPointerMarkerComponent } from './location-pointer-marker/location-pointer-marker.component';
 import { LocationService } from './shared/locations.service';
 import { Location, VehicleStatus } from './shared/models/location.model';
@@ -17,8 +18,8 @@ export class AppComponent {
   constructor(
     public viewContainerRef: ViewContainerRef,
     public componentFactoryResolver: ComponentFactoryResolver,
-    private locationService: LocationService, 
-    @Inject("H") public H: any) {}
+    private locationService: LocationService,
+    private hereMapService: HereMapService) {}
 
   onMapInit(map: any) {
     const locations: Location[] = this.locationService.getLocations();
@@ -32,14 +33,13 @@ export class AppComponent {
     const componentRef = this.getMarkerElement(location.status);
     const e = componentRef.location.nativeElement;
 
-    const icon = new this.H.map.DomIcon(e);
-    const marker = new this.H.map.DomMarker(location, {icon: icon});
+    const marker = this.hereMapService.getMarker(e, location);
     map.addObject(marker);
 
     componentRef.destroy(); // destroy reference once added to the map
   }
 
-  private getMarkerElement(vehicleStatus: VehicleStatus): any {
+  private getMarkerElement(vehicleStatus: VehicleStatus): ComponentRef<LocationPointerMarkerComponent> {
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(
       LocationPointerMarkerComponent
     );

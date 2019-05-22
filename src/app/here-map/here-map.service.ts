@@ -24,6 +24,11 @@ export class HereMapService {
         );
     }
 
+    getMarker(element: any, location: { lng: number, lat: number }): any {
+        const icon = new this.H.map.DomIcon(element);
+        return new this.H.map.DomMarker(location, {icon: icon});
+    }
+
     private getPlatform(): any {
         return new this.H.service.Platform({
             app_id: this.config.appId,
