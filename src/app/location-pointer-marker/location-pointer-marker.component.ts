@@ -1,12 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-
-export enum EquipmentStatus {
-  no_data = 0,
-  drive = 1,
-  idle = 2,
-  off = 3,
-  operate = 4
-}
+import { VehicleStatus } from '../shared/models/location.model';
 
 @Component({
   selector: 'location-pointer-marker',
@@ -16,7 +9,7 @@ export enum EquipmentStatus {
 })
 export class LocationPointerMarkerComponent {
   @Input()
-  status: EquipmentStatus;
+  status: VehicleStatus;
 
-  EquipmentStatus = EquipmentStatus;
+  VehicleStatus = VehicleStatus;
 }
