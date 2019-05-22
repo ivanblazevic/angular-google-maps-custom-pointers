@@ -1,12 +1,12 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, Inject, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { HereMapModuleConfig, HERO_MAP_CONFIG } from './here-map.config';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { HereMapService } from './here-map.service';
 
 @Component({
     selector: 'here-map',
     templateUrl: './here-map.component.html',
     styleUrls: ['./here-map.component.scss']
 })
-export class HereMapComponent implements OnInit, AfterViewInit {
+export class HereMapComponent implements AfterViewInit {
     @ViewChild("map")
     public mapElement: ElementRef;
 
@@ -25,31 +25,15 @@ export class HereMapComponent implements OnInit, AfterViewInit {
     @Output()
     public initialized = new EventEmitter<any>();
 
-    private platform: any;
-
-    private map: any;
-
-    constructor(@Inject(HERO_MAP_CONFIG) public config: HereMapModuleConfig, @Inject("H") public H: any) {}
-
-    public ngOnInit() {
-        this.platform = new this.H.service.Platform({
-            app_id: this.config.appId,
-            app_code: this.config.appCode,
-            useHTTPS: true
-        });
-    }
+    constructor(private hereMapService: HereMapService) {}
 
     public ngAfterViewInit() {
-        const defaultLayers = this.platform.createDefaultLayers();
-        this.map = new this.H.Map(
-            this.mapElement.nativeElement,
-            defaultLayers.normal.map,
-            {
-                zoom: 15,
-                center: { lat: this.lat, lng: this.lng }
-            }
-        );
-        this.initialized.emit(this.map);
+        const center = {
+            lat: this.lat,
+            lng: this.lng
+        }
+        const map = this.hereMapService.initMap(this.mapElement.nativeElement, center);
+        this.initialized.emit(map);
     }
 
 }
