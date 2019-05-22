@@ -10,7 +10,7 @@ export class LocationService {
     return this.generateLocation();
   }
 
-  private getRandomInt(max) {
+  private getRandomInt(max: number) {
     return Math.floor(Math.random() * Math.floor(max));
   }
 
@@ -21,10 +21,11 @@ export class LocationService {
     for (let i = 0; i < 9; i++) {
       const randomLat = Math.random() * 0.0099 + startPosition.lat;
       const randomLng = Math.random() * 0.0099 + startPosition.lng;
+
       locations.push({
         lat: randomLat,
         lng: randomLng,
-        status: this.getRandomInt(3) + 1
+        status: this.getRandomInt(4) + 1
       });
     }
     return locations;

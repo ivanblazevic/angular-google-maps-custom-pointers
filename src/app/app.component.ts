@@ -17,7 +17,7 @@ export class AppComponent {
   public center = { lat: 48.211967, lng: 16.382266 };
 
   constructor(
-    public viewContainerRef: ViewContainerRef, 
+    public viewContainerRef: ViewContainerRef,
     public componentFactoryResolver: ComponentFactoryResolver,
     private locationService: LocationService) {}
 
