@@ -1,4 +1,6 @@
 import { Injectable } from "@angular/core";
+import { interval, Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 import { Location } from "./models/location.model";
 
 @Injectable({
@@ -6,8 +8,8 @@ import { Location } from "./models/location.model";
 })
 export class LocationService {
 
-  getLocations(): Location[] {
-    return this.generateLocation();
+  getLocations(): Observable<Location[]> {
+    return interval(5000).pipe(startWith(this.generateLocation()), map(_ => this.generateLocation()));
   }
 
   private getRandomInt(max: number) {

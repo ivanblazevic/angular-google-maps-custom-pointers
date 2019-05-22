@@ -29,6 +29,10 @@ export class HereMapService {
         return new this.H.map.DomMarker(location, {icon: icon});
     }
 
+    getMarkerGroup(): any {
+        return new this.H.map.Group();
+    }
+
     private getPlatform(): any {
         return new this.H.service.Platform({
             app_id: this.config.appId,

@@ -1,4 +1,5 @@
 import { Component, ComponentFactoryResolver, ComponentRef, ElementRef, ViewChild, ViewContainerRef } from '@angular/core';
+import { Observable } from 'rxjs';
 import { HereMapService } from './here-map/here-map.service';
 import { LocationPointerMarkerComponent } from './location-pointer-marker/location-pointer-marker.component';
 import { LocationService } from './shared/locations.service';
@@ -15,6 +16,8 @@ export class AppComponent {
 
   public center = { lat: 48.211967, lng: 16.382266 };
 
+  private markersGroup = this.hereMapService.getMarkerGroup();
+
   constructor(
     public viewContainerRef: ViewContainerRef,
     public componentFactoryResolver: ComponentFactoryResolver,
@@ -22,10 +25,15 @@ export class AppComponent {
     private hereMapService: HereMapService) {}
 
   onMapInit(map: any) {
-    const locations: Location[] = this.locationService.getLocations();
+    const locations$: Observable<Location[]> = this.locationService.getLocations();
 
-    locations.forEach(p => {
-      this.addMarker(p, map);
+    map.addObject(this.markersGroup);
+
+    locations$.subscribe(r => {
+      this.markersGroup.removeAll();
+      r.forEach(p => {
+        this.addMarker(p, map);
+      });
     });
   }
 
@@ -34,7 +42,8 @@ export class AppComponent {
     const e = componentRef.location.nativeElement;
 
     const marker = this.hereMapService.getMarker(e, location);
-    map.addObject(marker);
+
+    this.markersGroup.addObject(marker);
 
     componentRef.destroy(); // destroy reference once added to the map
   }
