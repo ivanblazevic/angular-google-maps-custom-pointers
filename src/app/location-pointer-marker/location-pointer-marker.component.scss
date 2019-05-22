@@ -20,7 +20,7 @@ $truckColor: gray;
   height: 50px;
   border-radius: 50%;
   border: solid 5px white;
-  color: $primaryColorDarker;
+  color: $off_color;
   cursor: pointer;
   overflow: hidden;
   display: flex;
@@ -56,16 +56,12 @@ $truckColor: gray;
     @include pointerColor($drive_color);
   }
 
-  &.idle {
-    @include pointerColor($idle_color);
+  &.error {
+    @include pointerColor($error_color);
   }
 
   &.off {
     @include pointerColor($off_color);
-  }
-
-  &.service {
-    @include pointerColor($primaryColorDarker);
   }
 }
 
