@@ -1,7 +1,5 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, Inject, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { HERO_MAP_CONFIG } from './here-map.config';
-
-declare var H: any;
+import { HereMapModuleConfig, HERO_MAP_CONFIG } from './here-map.config';
 
 @Component({
     selector: 'here-map',
@@ -13,16 +11,16 @@ export class HereMapComponent implements OnInit, AfterViewInit {
     public mapElement: ElementRef;
 
     @Input()
-    public lat: any;
+    public lat: number;
 
     @Input()
-    public lng: any;
+    public lng: number;
 
     @Input()
-    public width: any;
+    public width: number;
 
     @Input()
-    public height: any;
+    public height: number;
 
     @Output()
     public initialized = new EventEmitter<any>();
@@ -31,10 +29,10 @@ export class HereMapComponent implements OnInit, AfterViewInit {
 
     private map: any;
 
-    constructor(@Inject(HERO_MAP_CONFIG) public config: any) {}
+    constructor(@Inject(HERO_MAP_CONFIG) public config: HereMapModuleConfig, @Inject("H") public H: any) {}
 
     public ngOnInit() {
-        this.platform = new H.service.Platform({
+        this.platform = new this.H.service.Platform({
             app_id: this.config.appId,
             app_code: this.config.appCode,
             useHTTPS: true
@@ -43,7 +41,7 @@ export class HereMapComponent implements OnInit, AfterViewInit {
 
     public ngAfterViewInit() {
         const defaultLayers = this.platform.createDefaultLayers();
-        this.map = new H.Map(
+        this.map = new this.H.Map(
             this.mapElement.nativeElement,
             defaultLayers.normal.map,
             {

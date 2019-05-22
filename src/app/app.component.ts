@@ -1,9 +1,7 @@
-import { Component, ComponentFactoryResolver, ElementRef, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ComponentFactoryResolver, ElementRef, Inject, ViewChild, ViewContainerRef } from '@angular/core';
 import { LocationPointerMarkerComponent } from './location-pointer-marker/location-pointer-marker.component';
 import { LocationService } from './shared/locations.service';
 import { Location, VehicleStatus } from './shared/models/location.model';
-
-declare var H: any;
 
 @Component({
   selector: 'app-root',
@@ -19,7 +17,8 @@ export class AppComponent {
   constructor(
     public viewContainerRef: ViewContainerRef,
     public componentFactoryResolver: ComponentFactoryResolver,
-    private locationService: LocationService) {}
+    private locationService: LocationService, 
+    @Inject("H") public H: any) {}
 
   onMapInit(map: any) {
     const locations: Location[] = this.locationService.getLocations();
@@ -29,12 +28,12 @@ export class AppComponent {
     });
   }
 
-  private addMarker(location: Location, map): void {
+  private addMarker(location: Location, map: any): void {
     const componentRef = this.getMarkerElement(location.status);
     const e = componentRef.location.nativeElement;
 
-    const icon = new H.map.DomIcon(e);
-    const marker = new H.map.DomMarker(location, {icon: icon});
+    const icon = new this.H.map.DomIcon(e);
+    const marker = new this.H.map.DomMarker(location, {icon: icon});
     map.addObject(marker);
 
     componentRef.destroy(); // destroy reference once added to the map
