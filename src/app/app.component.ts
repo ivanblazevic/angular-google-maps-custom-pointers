@@ -1,4 +1,11 @@
-import { Component, ComponentFactoryResolver, ComponentRef, ElementRef, ViewChild, ViewContainerRef } from '@angular/core';
+import {
+  Component,
+  ComponentFactoryResolver,
+  ComponentRef,
+  ElementRef,
+  ViewChild,
+  ViewContainerRef
+} from '@angular/core';
 import { Observable } from 'rxjs';
 import { HereMapService } from './here-map/here-map.service';
 import { LocationPointerMarkerComponent } from './location-pointer-marker/location-pointer-marker.component';
@@ -22,10 +29,13 @@ export class AppComponent {
     public viewContainerRef: ViewContainerRef,
     public componentFactoryResolver: ComponentFactoryResolver,
     private locationService: LocationService,
-    private hereMapService: HereMapService) {}
+    private hereMapService: HereMapService
+  ) {}
 
   onMapInit(map: any) {
-    const locations$: Observable<Location[]> = this.locationService.getLocations();
+    const locations$: Observable<
+      Location[]
+    > = this.locationService.getLocations();
 
     map.addObject(this.markersGroup);
 
@@ -48,7 +58,9 @@ export class AppComponent {
     componentRef.destroy(); // destroy reference once added to the map
   }
 
-  private getMarkerElement(vehicleStatus: VehicleStatus): ComponentRef<LocationPointerMarkerComponent> {
+  private getMarkerElement(
+    vehicleStatus: VehicleStatus
+  ): ComponentRef<LocationPointerMarkerComponent> {
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(
       LocationPointerMarkerComponent
     );
@@ -61,5 +73,4 @@ export class AppComponent {
 
     return componentRef;
   }
-
 }

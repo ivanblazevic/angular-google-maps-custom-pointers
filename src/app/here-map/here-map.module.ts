@@ -1,6 +1,6 @@
-import { ModuleWithProviders, NgModule } from "@angular/core";
-import { HereMapComponent } from "./here-map.component";
-import { HereMapModuleConfig, HERO_MAP_CONFIG } from "./here-map.config";
+import { ModuleWithProviders, NgModule } from '@angular/core';
+import { HereMapComponent } from './here-map.component';
+import { HereMapModuleConfig, HERO_MAP_CONFIG } from './here-map.config';
 
 @NgModule({
   declarations: [HereMapComponent],
@@ -15,7 +15,7 @@ export class HereMapModule {
           provide: HERO_MAP_CONFIG,
           useValue: config
         },
-        { provide: "H", useValue: window["H"] }
+        { provide: 'H', useValue: window['H'] }
       ]
     };
   }

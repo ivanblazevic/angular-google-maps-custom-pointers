@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HereMapComponent } from './here-map.component';
+import { LoadingIndicatorComponent } from './loading-indicator.component';
 
-describe('HereMapComponent', () => {
-  let component: HereMapComponent;
-  let fixture: ComponentFixture<HereMapComponent>;
+describe('LoadingIndicatorComponent', () => {
+  let component: LoadingIndicatorComponent;
+  let fixture: ComponentFixture<LoadingIndicatorComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [HereMapComponent]
+      declarations: [LoadingIndicatorComponent]
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HereMapComponent);
+    fixture = TestBed.createComponent(LoadingIndicatorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,0 +1,72 @@
+/* inspired by https://jsfiddle.net/kmturley/54hqzmk7 */
+
+$width: 30px;
+$border: 5px;
+$foreground: #676565;
+$background: rgba($foreground, 0.2);
+$duration: 5s;
+$value1: (2 * $border + $width);
+$value2: ($value1/2);
+
+.radial {
+  width: $width;
+  height: $width;
+  border-radius: 100%;
+  border: $border solid $background;
+}
+
+.circle {
+  margin: -1 * $border;
+}
+
+.circle.left {
+  position: absolute;
+  clip: rect(0, $value1, $value1, $value2);
+}
+
+.circle.right {
+  position: absolute;
+  clip: rect(0px, $value2, $value1, 0px);
+}
+
+.circle span {
+  width: $width;
+  height: $width;
+  border-radius: 100%;
+  position: absolute;
+  border: $border solid $foreground;
+}
+
+.circle.left span {
+  clip: rect(0px, $value2, $value1, 0px);
+  -webkit-animation: rotate-left $duration infinite linear;
+}
+
+.circle.right span {
+  clip: rect(0, $value1, $value1, $value2);
+  -webkit-animation: rotate-right $duration infinite linear;
+}
+
+@-webkit-keyframes rotate-left {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  50% {
+    -webkit-transform: rotate(180deg);
+  }
+  100% {
+    -webkit-transform: rotate(180deg);
+  }
+}
+
+@-webkit-keyframes rotate-right {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  50% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(180deg);
+  }
+}

@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  here_maps_app_id: "pAkcepL9nwxnx4C8BAwt",
-  here_maps_app_code: "sbTmDwco5HJQCJZ5PLoKuA",
+  here_maps_app_id: 'pAkcepL9nwxnx4C8BAwt',
+  here_maps_app_code: 'sbTmDwco5HJQCJZ5PLoKuA'
 };
 
 /*
